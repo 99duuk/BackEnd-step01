@@ -1,0 +1,23 @@
+docker image ls
+
+
+docker rm zzz
+
+docker ps
+docker ps -a 
+
+
+1. 
+docker pull mysql 
+
+2.
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=123456 -d -p 4306:3306 mysql
+
+
+
+
+
+<——————————————————————————————————————>
+
+1. 
+docker run -e ORACLE_PASSWORD=pass -p 2521:2521 -d gvenzl/oracle-xe
