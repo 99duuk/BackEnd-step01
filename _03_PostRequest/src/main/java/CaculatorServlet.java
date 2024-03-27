@@ -25,7 +25,7 @@ public class CaculatorServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("CaculatorServlet - doGet......");
+		System.out.println("CaculatorServlet::doPost......");
 		// 브라우저가 보낸 파라미터를 꺼낸다.
 		String op = req.getParameter("op");
 		double v1 = Double.parseDouble(req.getParameter("v1"));
@@ -58,14 +58,3 @@ public class CaculatorServlet extends HttpServlet {
 		out.println("</body></html>");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

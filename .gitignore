@@ -1,13 +1,13 @@
-/Servers/
+# /Servers/
 /.metadata/
 /.recommenders/
-.settings/
+# .settings/
 bin/
 build/
 temp/
 Debug/
 Release/
-.classpath
+# .classpath
 *.class
 *.war
 *.log
