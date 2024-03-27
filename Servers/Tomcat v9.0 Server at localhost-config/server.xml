@@ -60,7 +60,10 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+    
+    <!-- GET 요청의 문자셋은 이곳에서 함 -->
+    <Connector URIEncoding="UTF-8" connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+    
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -160,7 +163,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="_02_GetRequest" path="/_02_GetRequest" reloadable="true" source="org.eclipse.jst.jee.server:_02_GetRequest"/><Context docBase="_01_FirstWebProject1" path="/_01_FirstWebProject1" reloadable="true" source="org.eclipse.jst.jee.server:_01_FirstWebProject1"/><Context docBase="_03_PostRequest" path="/_03_PostRequest" reloadable="true" source="org.eclipse.jst.jee.server:_03_PostRequest"/><Context docBase="_04_ServletIndex" path="/_04_ServletIndex" reloadable="true" source="org.eclipse.jst.jee.server:_04_ServletIndex"/></Host>
+      <Context docBase="_10_NumberAddServlet_Post" path="/_10_NumberAddServlet_Post" reloadable="true" source="org.eclipse.jst.jee.server:_10_NumberAddServlet_Post"/><Context docBase="_11_NumberAddServlet_Refresh" path="/_11_NumberAddServlet_Refresh" reloadable="true" source="org.eclipse.jst.jee.server:_11_NumberAddServlet_Refresh"/><Context docBase="_12_NumberAddServlet_Redirect" path="/_12_NumberAddServlet_Redirect" reloadable="true" source="org.eclipse.jst.jee.server:_12_NumberAddServlet_Redirect"/><Context docBase="_13_NumberAddServlet_update_html" path="/_13_NumberAddServlet_update_html" reloadable="true" source="org.eclipse.jst.jee.server:_13_NumberAddServlet_update_html"/></Host>
     </Engine>
   </Service>
 </Server>
