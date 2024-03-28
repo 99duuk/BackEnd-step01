@@ -1,11 +1,10 @@
 package spms.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,134 +20,78 @@ import spms.vo.Member;
 
 @WebServlet("/member/list")
 @SuppressWarnings("serial")
-public class MemberListServlet extends HttpServlet {
-
+public class MemberListServlet extends HttpServlet{
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("MemberListServlet::doGet() 호출 ");
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		System.out.println("MemberListServlet::doGet() 호출");
+		
+		Connection conn = null;			// DB 서버와의 연결 객체
+		Statement stmt = null;			// sql문
+		ResultSet rs = null;			// Select문의 결과
+		
 		try {
 			ServletContext sc = this.getServletContext();
 			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(sc.getInitParameter("url"), sc.getInitParameter("username"), sc.getInitParameter("password"));
-			
-			pstmt = conn.prepareStatement("SELECT mno, mname, email, cre_date FROM members ORDER BY mno ASC");
-			
-			// DB table 전체 리스트를 가져와서 rs에 저장한 상태 
-			rs = pstmt.executeQuery();
-			
+			conn = DriverManager.getConnection(
+					sc.getInitParameter("url"),	// JDBC url
+					sc.getInitParameter("username"),								// id
+					sc.getInitParameter("password"));
+			stmt = conn.createStatement();
+			// DB 테이블 전체 리스트를 가져와서 rs에 저장한 상태
+			rs = stmt.executeQuery("SELECT mno, mname, email, cre_date" +
+								 " FROM members" +
+								 " ORDER BY mno ASC");
+			/* 회원 목록을 list객체로 생성
+			 * MemberList.jsp를 호출하면서 list객체를 전달
+			 * */
 			List<Member> members = new ArrayList<>();
-			while (rs.next()) {
+			while(rs.next()) {
 				members.add(new Member()
-						.setNo(rs.getInt("mno"))
-						.setName(rs.getString("mname"))
-						.setEmail(rs.getString("email"))
-						.setCreateDate(rs.getDate("cre_date"))
+								.setNo(rs.getInt("mno"))
+								.setName(rs.getString("mname"))
+								.setEmail(rs.getString("email"))
+								.setCreatedDate(rs.getDate("cre_date"))
 						);
 			}
-			// request공간에 membersfksms key값으로 list를 저장한다. 
+			
+			// request 공간에 members라는 key값으로 list를 저장한다.
+			// 그러면 MemberList.jsp에서는 members라는 key값으로 꺼낼 수 있다.
 			req.setAttribute("members", members);
 			
 			// MemberListServlet객체에서 MemberList.jsp로 
-			//request객체와 response객체를 전달한다. 
+			// request객체와 response객체를 전달한다.
 			RequestDispatcher rd = req.getRequestDispatcher(
-					"/member/MemberList.jsp");
+						"/member/MemberList.jsp");
+			// include방식으로 전달한다.
 			rd.include(req, res);
-					
 			
-			// CharacterEncodingFilter로 전처리해서 안해도 댐
-			// resp.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>회원 목록</title>");
-			out.println("<style>");
-			out.println("body {");
-			out.println("  font-family: Arial, sans-serif;");
-			out.println("  background-color: #f4f4f4;");
-			out.println("  margin: 0;");
-
-			out.println("  padding: 0;");
-			out.println("}");
-			out.println("h1 {");
-			out.println("  text-align: center;");
-			out.println("  padding: 20px 0;");
-			out.println("}");
-			out.println("table {");
-			out.println("  width: 80%;");
-			out.println("  margin: 20px auto;");
-			out.println("  border-collapse: collapse;");
-			out.println("  background-color: #fff;");
-			out.println("  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);");
-			out.println("}");
-			out.println("th, td {");
-			out.println("  padding: 12px 15px;");
-			out.println("  border-bottom: 1px solid #ddd;");
-			out.println("}");
-			out.println("tr:hover {");
-			out.println("  background-color: #f2f2f2;");
-			out.println("}");
-			out.println("a.button {");
-			out.println("  display: inline-block;");
-			out.println("  padding: 10px 20px;");
-			out.println("  text-decoration: none;");
-			out.println("  background-color: #4caf50;");
-			out.println("  color: #fff;");
-			out.println("  border-radius: 5px;");
-			out.println("}");
-			out.println("a.button:hover {");
-			out.println("  background-color: #45a049;");
-			out.println("}");
-			out.println("</style>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>회원 목록</h1>");
-			out.println("<a href='add' class='button'>신규 회원 추가</a>");
-			out.println("<table>");
-			out.println("<tr>");
-			out.println("<th>번호</th>");
-			out.println("<th>이름</th>");
-			out.println("<th>이메일</th>");
-			out.println("<th>가입일</th>");
-			out.println("<th>삭제</th>");
-			out.println("</tr>");
-
-			while (rs.next()) {
-				out.println("<tr>");
-				out.println("<td>" + rs.getInt("mno") + "</td>");
-				out.println("<td><a href='update?no=" + rs.getInt("mno") + "'>" + rs.getString("mname") + "</a></td>");
-				out.println("<td>" + rs.getString("email") + "</td>");
-				out.println("<td>" + rs.getDate("cre_date") + "</td>");
-				out.println("<td><form action='delete' method='post'>" + "<input type='hidden' name='no' value='"
-						+ rs.getInt("mno") + "'>" + "<input type='submit' value='삭제'>" + "</form></td>");
-				out.println("</tr>");
+			/*
+			 * html코드와 html코드에 java값을 전달하는 부분
+			res.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = res.getWriter();
+			out.println("<html><head><title>회원 목록</title></head>");
+			out.println("<body><h1>회원 목록</h1>");
+			out.println("<p><a href='add'>신규 회원</a></p>");
+			while(rs.next()) {
+				out.println(
+					rs.getInt("MNO") + "," +
+					"<a href='update?no=" + rs.getInt("MNO") + "'>" +
+					rs.getString("MNAME") + "</a>," +
+					rs.getString("EMAIL") + "," + 
+					rs.getDate("CRE_DATE") + 
+					"<a href='delete?no=" + rs.getInt("MNO") + 
+					"'>[삭제]</a><br>");
 			}
-
-			out.println("</table>");
-			out.println("</body>");
-			out.println("</html>");
-
-		} catch (Exception e) {
+			out.println("</body></html>");
+			*/
+		}catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-			}
+		}finally {
+			// 생성한 역순으로 닫아준다.
+			try {if(rs!=null) rs.close();} catch(Exception e) {}
+			try {if(stmt!=null) stmt.close();} catch(Exception e) {}
+			try {if(conn!=null) conn.close();} catch(Exception e) {}
 		}
 	}
 
