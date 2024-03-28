@@ -163,7 +163,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="_10_NumberAddServlet_Post" path="/_10_NumberAddServlet_Post" reloadable="true" source="org.eclipse.jst.jee.server:_10_NumberAddServlet_Post"/><Context docBase="_11_NumberAddServlet_Refresh" path="/_11_NumberAddServlet_Refresh" reloadable="true" source="org.eclipse.jst.jee.server:_11_NumberAddServlet_Refresh"/><Context docBase="_12_NumberAddServlet_Redirect" path="/_12_NumberAddServlet_Redirect" reloadable="true" source="org.eclipse.jst.jee.server:_12_NumberAddServlet_Redirect"/><Context docBase="_13_NumberAddServlet_update_html" path="/_13_NumberAddServlet_update_html" reloadable="true" source="org.eclipse.jst.jee.server:_13_NumberAddServlet_update_html"/></Host>
+      <Context docBase="_19_Fillter" path="/_18_Question" reloadable="true" source="org.eclipse.jst.jee.server:_19_Fillter"/><Context docBase="_21_JSP" path="/_21_JSP" reloadable="true" source="org.eclipse.jst.jee.server:_21_JSP"/><Context docBase="_22_Calculator.jsp" path="/_22_Calculator.jsp" reloadable="true" source="org.eclipse.jst.jee.server:_22_Calculator.jsp"/></Host>
     </Engine>
   </Service>
 </Server>
