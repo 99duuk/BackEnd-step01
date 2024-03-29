@@ -17,7 +17,7 @@ public class Member {
 	private String name;
 	private String email;
 	private String password;
-	private Date createDate;
+	private Date createdDate;
 	private Date modifiedDate;
 	public int getNo() {
 		return no;
@@ -47,11 +47,11 @@ public class Member {
 		this.password = password;
 		return this;
 	}
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public Member setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public Member setCreatedDate(Date createDate) {
+		this.createdDate = createDate;
 		return this;
 	}
 	public Date getModifiedDate() {
@@ -67,7 +67,7 @@ public class Member {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.createDate = createDate;
+		this.createdDate = createDate;
 		this.modifiedDate = modifiedDate;
 	}
 	
@@ -77,7 +77,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", createDate="
-				+ createDate + ", modifiedDate=" + modifiedDate + "]";
+				+ createdDate + ", modifiedDate=" + modifiedDate + "]";
 	}
 	
 	
