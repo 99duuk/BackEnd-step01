@@ -161,7 +161,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="_58_Application_Context_File" path="/_58_Application_Context_File" reloadable="true" source="org.eclipse.jst.jee.server:_58_Application_Context_File"/><Context docBase="_60_Implement_Annotation" path="/_59_Automation_Annotation" reloadable="true" source="org.eclipse.jst.jee.server:_60_Implement_Annotation"/></Host>
+      <Context docBase="_58_Application_Context_File" path="/_58_Application_Context_File" reloadable="true" source="org.eclipse.jst.jee.server:_58_Application_Context_File"/><Context docBase="_60_Implement_Annotation" path="/_59_Automation_Annotation" reloadable="true" source="org.eclipse.jst.jee.server:_60_Implement_Annotation"/><Context docBase="_63_Projects_List" path="/_63_Projects_List" reloadable="true" source="org.eclipse.jst.jee.server:_63_Projects_List"/><Context docBase="_66_Projects_Update" path="/_66_Projects_Update" reloadable="true" source="org.eclipse.jst.jee.server:_66_Projects_Update"/><Context docBase="_67_Header_Member_Project_Link" path="/_67_Header_Member_Project_Link" reloadable="true" source="org.eclipse.jst.jee.server:_67_Header_Member_Project_Link"/></Host>
     </Engine>
   </Service>
 </Server>

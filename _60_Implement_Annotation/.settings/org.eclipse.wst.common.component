@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                                                                                                                                                                                                
+                                                                                                                                                                                                                    
+    
     
     
     
@@ -51,7 +52,8 @@
     
     
     <wb-module deploy-name="_08_MemberListServlet">
-                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
         
         
         
@@ -103,7 +105,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
         
         
         
@@ -155,7 +158,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
         
         
         
@@ -207,8 +211,9 @@
         
         
         <property name="java-output-path" value="/_08_MemberListServlet/build/classes"/>
-        <property name="context-root" value="_59_Automation_Annotation"/>
-                                                                                                                                                                                                                                                                                                                                                                                                                            
+        <property name="context-root" value="_61_Project_Vo"/>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -260,7 +265,8 @@
     
     
     </wb-module>
-                                                                                                                                                                                                            
+                                                                                                                                                                                                                
+
 
 
 
